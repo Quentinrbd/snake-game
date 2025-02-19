@@ -1,0 +1,29 @@
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.row {
+  display: flex;
+}
+
+.cell {
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ccc;
+  background-color: white;
+}
+
+.snake {
+  background-color: green !important;
+  /* border-radius: 5px; */
+}
+
+.food {
+  background-color: red !important;
+  border-radius: 50%;
+}
+
+
