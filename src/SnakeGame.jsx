@@ -9,6 +9,7 @@ export default function SnakeGame() {
     const [snake, setSnake] = useState(initialPosition)
     const [direction, setDirection] = useState(initialDirection)
     const [food, setFood] = useState(generateFood())
+    const [score, setScore] = useState(0)
 
     useEffect(() => {
         const handleKeyPress = (event) => {
@@ -49,12 +50,14 @@ export default function SnakeGame() {
             alert("Game Over!");
             setSnake(initialPosition)
             setFood(generateFood())
+            setScore(0)
             return
           }
 
           newSnake.push(head)
           if (head[0] === food[0] && head[1] === food[1]) {
             setFood(generateFood());
+            setScore(score +1)
           } else {
             newSnake.shift();
           }
@@ -88,6 +91,7 @@ export default function SnakeGame() {
         })}
       </div>
     ))}
+    <p>Score : {score}</p>
   </div>
   )
 }
