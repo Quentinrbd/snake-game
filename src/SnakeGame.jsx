@@ -10,6 +10,7 @@ export default function SnakeGame() {
     const [direction, setDirection] = useState(initialDirection)
     const [food, setFood] = useState(generateFood())
     const [score, setScore] = useState(0)
+    const [speed, setSpeed] = useState(200)
 
     useEffect(() => {
         const handleKeyPress = (event) => {
@@ -21,9 +22,9 @@ export default function SnakeGame() {
     }, [])
 
     useEffect(() => {
-        const interval = setInterval(moveSnake,150)
+        const interval = setInterval(moveSnake, speed)
         return () => clearInterval(interval)
-    }, [snake, direction])
+    }, [snake, direction, speed])
 
     function generateFood() {
         let x, y
@@ -51,6 +52,7 @@ export default function SnakeGame() {
             setSnake(initialPosition)
             setFood(generateFood())
             setScore(0)
+            setSpeed(200)
             return
           }
 
@@ -58,6 +60,7 @@ export default function SnakeGame() {
           if (head[0] === food[0] && head[1] === food[1]) {
             setFood(generateFood());
             setScore(score +1)
+            setSpeed((prevSpeed) => Math.max(20, prevSpeed - 10))
           } else {
             newSnake.shift();
           }
@@ -92,6 +95,7 @@ export default function SnakeGame() {
       </div>
     ))}
     <p>Score : {score}</p>
+    <p>{speed}</p>
   </div>
   )
 }
