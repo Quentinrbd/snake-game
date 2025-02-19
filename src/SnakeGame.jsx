@@ -95,7 +95,6 @@ export default function SnakeGame() {
       </div>
     ))}
     <p>Score : {score}</p>
-    <p>{speed}</p>
   </div>
   )
 }

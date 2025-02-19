@@ -1,3 +1,7 @@
+body {
+  background-color: rgb(146, 138, 133);
+}
+
 .board {
   display: flex;
   flex-direction: column;
@@ -22,8 +26,13 @@
 }
 
 .food {
-  background-color: red !important;
-  border-radius: 50%;
+  /* background-color: red !important; */
+  /* border-radius: 50%; */
+  background-image: url("../public/apple.png");
+  background-size: contain;
+  background-position: center;
+  width: 30px;
+  height: 30px;
 }
 
 
