@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './index.css'
+import GameOverModal from './GameOverModal/GameOverModal'
 
 const gridSize = 15
 const initialPosition = [[5,5]]
@@ -11,6 +12,8 @@ export default function SnakeGame() {
     const [food, setFood] = useState(generateFood())
     const [score, setScore] = useState(0)
     const [speed, setSpeed] = useState(200)
+    
+    const [gameOver, setGameOver] = useState(false);
 
     useEffect(() => {
         const handleKeyPress = (event) => {
@@ -22,8 +25,10 @@ export default function SnakeGame() {
     }, [])
 
     useEffect(() => {
-        const interval = setInterval(moveSnake, speed)
-        return () => clearInterval(interval)
+      if (gameOver) return
+
+      const interval = setInterval(moveSnake, speed)
+      return () => clearInterval(interval)
     }, [snake, direction, speed])
 
     function generateFood() {
@@ -48,11 +53,7 @@ export default function SnakeGame() {
         }
 
         if (head[0] < 0 || head[0] >= gridSize || head[1] < 0 || head[1] >= gridSize || snake.some(([x, y]) => x === head[0] && y === head[1])) {
-            alert("Game Over!");
-            setSnake(initialPosition)
-            setFood(generateFood())
-            setScore(0)
-            setSpeed(200)
+            setGameOver(true)
             return
           }
 
@@ -60,7 +61,7 @@ export default function SnakeGame() {
           if (head[0] === food[0] && head[1] === food[1]) {
             setFood(generateFood());
             setScore(score +1)
-            setSpeed((prevSpeed) => Math.max(20, prevSpeed - 10))
+            setSpeed((prevSpeed) => Math.max(50, prevSpeed - 5))
           } else {
             newSnake.shift();
           }
@@ -76,8 +77,18 @@ export default function SnakeGame() {
           }
           return directions[key]
     }
+
+    const restartGame = () => {
+      setSnake(initialPosition)
+      setFood(generateFood())
+      setScore(0)
+      setSpeed(200)
+      setGameOver(false)
+    }
+    
   return (
     <div className="board">
+      <h1 className='title'>Snake game</h1>
     {Array.from({ length: gridSize }, (_, y) => (
       <div key={y} className="row">
         {Array.from({ length: gridSize }, (_, x) => {
@@ -92,9 +103,13 @@ export default function SnakeGame() {
           }
           return <div key={x} className={className} />;
         })}
+
+        {gameOver && <GameOverModal restart={restartGame} score={score}/>}
       </div>
     ))}
-    <p>Score : {score}</p>
+   
+    {gameOver === false ? <p id='score'>Score : {score}</p> : ""}
+    <p id='credit'>by Quentin Ribardière. <a href="https://github.com/Quentinrbd/snake-game" target='_blank'>Github repo</a></p>
   </div>
   )
 }

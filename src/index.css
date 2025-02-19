@@ -1,5 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Jersey+15&display=swap');
+
 body {
-  background-color: rgb(146, 138, 133);
+  background-color: rgb(39, 38, 38);
+  font-family: "Jersey 15", serif;
+  /* font-weight: 400; */
+}
+
+.title {
+  font-size: 60px;
+  color: rgb(214, 212, 212);
 }
 
 .board {
@@ -16,23 +25,38 @@ body {
 .cell {
   width: 30px;
   height: 30px;
-  border: 1px solid #ccc;
-  background-color: white;
+  border: 1px solid #b8b7b7;
+  background-color: rgb(214, 212, 212);
 }
 
 .snake {
   background-color: green !important;
-  /* border-radius: 5px; */
 }
 
 .food {
-  /* background-color: red !important; */
-  /* border-radius: 50%; */
-  background-image: url("../public/apple.png");
+  background-image: url("/apple.png");
   background-size: contain;
   background-position: center;
   width: 30px;
   height: 30px;
 }
 
+#score {
+  font-size: 33px;
+  color: rgb(214, 212, 212);
 
+}
+
+#credit {
+  position: absolute;
+  bottom: 0;
+  margin: 0;
+  margin-bottom: 10px;
+  font-size: 23px;
+
+  a {
+    /* list-style: none; */
+    color: beige;
+    text-decoration: none;
+  }
+}
