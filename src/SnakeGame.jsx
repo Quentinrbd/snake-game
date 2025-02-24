@@ -12,8 +12,20 @@ export default function SnakeGame() {
     const [food, setFood] = useState(generateFood())
     const [score, setScore] = useState(0)
     const [speed, setSpeed] = useState(200)
+    const [highScores, setHighScores] = useState([])
     
     const [gameOver, setGameOver] = useState(false);
+
+    const saveScores = (newScore) => {
+      let scores = [...highScores, newScore].sort((a,b) => b - a).slice(0,5)
+      setHighScores(scores)
+      localStorage.setItem("highScores", JSON.stringify(scores))
+    }
+
+    useEffect(() => {
+      const scores = JSON.parse(localStorage.getItem("highScores")) ||[]
+      setHighScores(scores)
+    })
 
     useEffect(() => {
         const handleKeyPress = (event) => {
@@ -54,6 +66,7 @@ export default function SnakeGame() {
 
         if (head[0] < 0 || head[0] >= gridSize || head[1] < 0 || head[1] >= gridSize || snake.some(([x, y]) => x === head[0] && y === head[1])) {
             setGameOver(true)
+            saveScores(score)
             return
           }
 
@@ -102,13 +115,20 @@ export default function SnakeGame() {
             className += " food";
           }
           return <div key={x} className={className} />;
-        })}
+        })}      
 
         {gameOver && <GameOverModal restart={restartGame} score={score}/>}
       </div>
     ))}
    
     {gameOver === false ? <p id='score'>Score : {score}</p> : ""}
+
+
+      {highScores.map((score, index) => (
+        <span>
+          {index + 1} - {score} points
+        </span>          
+      ))}
     <p id='credit'>by Quentin Ribardière <br /> <a href="https://github.com/Quentinrbd/snake-game" target='_blank'>Github repo</a></p>
   </div>
   )
