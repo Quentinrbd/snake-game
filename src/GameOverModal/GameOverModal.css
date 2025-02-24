@@ -20,6 +20,7 @@
   }
   
   .popup button {
+    font-family: "Pixelify Sans", serif;
     padding: 10px 20px;
     font-size: 18px;
     margin-top: 10px;
@@ -27,4 +28,10 @@
     border-radius: 20px;
     border: 2px solid rgb(59, 59, 59);
   }
+
+.popup button:hover {
+  color: white;
+  background-color: rgb(59, 59, 59);
+  border: 2px solid rgb(214, 212, 212)
+}
   

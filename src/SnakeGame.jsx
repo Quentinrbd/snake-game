@@ -109,7 +109,7 @@ export default function SnakeGame() {
     ))}
    
     {gameOver === false ? <p id='score'>Score : {score}</p> : ""}
-    <p id='credit'>by Quentin Ribardière. <a href="https://github.com/Quentinrbd/snake-game" target='_blank'>Github repo</a></p>
+    <p id='credit'>by Quentin Ribardière <br /> <a href="https://github.com/Quentinrbd/snake-game" target='_blank'>Github repo</a></p>
   </div>
   )
 }
