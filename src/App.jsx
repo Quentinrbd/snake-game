@@ -1,4 +1,3 @@
-import './App.css'
 import SnakeGame from './SnakeGame'
 
 function App() {
