@@ -2,14 +2,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400..700&display=swap');
 
 body {
-  background-color: rgb(39, 38, 38);
+  background-color: rgb(13, 42, 82);
   font-family: "Pixelify Sans", serif;
   /* font-weight: 400; */
 }
 
 .title {
   font-size: 60px;
-  color: rgb(214, 212, 212);
+  /* color: rgb(214, 212, 212); */
+  color: white;
 }
 
 .board {

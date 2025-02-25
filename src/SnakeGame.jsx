@@ -16,6 +16,14 @@ export default function SnakeGame() {
     
     const [gameOver, setGameOver] = useState(false);
 
+    const miamSoud = new Audio("/miam.wav")
+    const gameStart = new Audio("gamestart.mp3")
+
+    const playSoud = (sound) => {
+      sound.currentTime = 0
+      sound.play()
+    }
+
     const saveScores = (newScore) => {
       let scores = [...highScores, newScore].sort((a,b) => b - a).slice(0,5)
       setHighScores(scores)
@@ -23,11 +31,10 @@ export default function SnakeGame() {
     }
 
     useEffect(() => {
+      // localstorage high scores
       const scores = JSON.parse(localStorage.getItem("highScores")) ||[]
       setHighScores(scores)
-    })
 
-    useEffect(() => {
         const handleKeyPress = (event) => {
             const newDirection = getDirection(event.key)
             if(newDirection) setDirection(newDirection)
@@ -75,6 +82,7 @@ export default function SnakeGame() {
             setFood(generateFood());
             setScore(score +1)
             setSpeed((prevSpeed) => Math.max(50, prevSpeed - 5))
+            playSoud(miamSoud)
           } else {
             newSnake.shift();
           }
@@ -97,6 +105,7 @@ export default function SnakeGame() {
       setScore(0)
       setSpeed(200)
       setGameOver(false)
+      playSoud(gameStart)
     }
     
   return (
@@ -117,18 +126,12 @@ export default function SnakeGame() {
           return <div key={x} className={className} />;
         })}      
 
-        {gameOver && <GameOverModal restart={restartGame} score={score}/>}
+        {gameOver && <GameOverModal restart={restartGame} score={score} highScores={highScores}/>}
       </div>
     ))}
    
     {gameOver === false ? <p id='score'>Score : {score}</p> : ""}
-
-
-      {highScores.map((score, index) => (
-        <span>
-          {index + 1} - {score} points
-        </span>          
-      ))}
+      
     <p id='credit'>by Quentin Ribardière <br /> <a href="https://github.com/Quentinrbd/snake-game" target='_blank'>Github repo</a></p>
   </div>
   )

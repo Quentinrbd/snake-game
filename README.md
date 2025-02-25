@@ -1,1 +1,1 @@
-Snake Game en React.
+Snake Game with React.
